@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-
+<script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
+<script>
+  window.TrackJS && TrackJS.install({ 
+    token: "2ed5b978d968415287e0cc097a5b5a2b"
+    // for more configuration options, see https://docs.trackjs.com
+  });
+</script>
+                        
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -102,6 +109,133 @@
 
     // Start your code here
     // You may move this JS to another file if you wish
+
+    let errBtn = Array.from(document.querySelectorAll('#error-btns > button'));
+
+    // console log
+    errBtn[0].addEventListener('click', () => {
+      console.log("console log");
+    });
+
+    // console error
+    errBtn[1].addEventListener('click', () => {
+      console.error("console error");
+    });
+
+    // console button
+    errBtn[2].addEventListener('click', () => {
+      console.count("count button");
+    });
+
+    // console warn button 
+    errBtn[3].addEventListener('click', () => {
+      console.warn("console warn");
+    });
+
+    // console assert
+    errBtn[4].addEventListener('click', () => {
+        const num = 4;
+        const errMsg = "Incorrect! Doesn't equal to 10"
+        console.assert(num == 10, {num, errMsg});
+      });
+
+    // console clear
+    errBtn[5].addEventListener('click', () => {
+      console.clear();
+    });
+
+    // console dir
+    errBtn[6].addEventListener('click', () => {
+          console.dir(errBtn[6]);
+    });
+
+    // console dirxml
+    errBtn[7].addEventListener('click', () => {
+          console.dirxml(errBtn[7]);
+    });
+
+    // console group start
+    errBtn[8].addEventListener('click', () => {
+          console.log("hello! we are up here")
+          console.group();
+          console.log("now we are inside a group");
+    });
+
+    // console group end
+    errBtn[9].addEventListener('click', () => {
+          console.log("now we are inside a group");
+          console.groupEnd();
+          console.log("hello! we are back here")
+          
+    });
+
+    // console table
+    errBtn[10].addEventListener('click', () => {
+          const information = [
+          ["JAPANESE", "CURRY"],
+          ["KOREAN", "FRIED CHICKEN"]
+          ];
+        console.table(information);
+    });
+
+    // console start time
+    errBtn[11].addEventListener('click', () => {
+          console.time("start");
+    });
+
+    // console end time
+    errBtn[12].addEventListener('click', () => {
+          console.timeEnd();
+    });
+
+    // console trace
+    errBtn[13].addEventListener('click', () => {
+      function kitkat() {
+        function bar() {
+          console.trace();
+        }
+        bar();
+      }
+      kitkat();
+    });
+    
+    // global error
+        errBtn[14].addEventListener('click', () => {
+          try {
+          throw new Error("msg");
+      } catch (e) {
+          console.log("for new Error()");
+          console.log(e);
+      } finally {
+        console.log("Finally will always get executed")
+      }
+    });
+   
+
+    // custom error 
+    class customError extends Error {
+      constructor(message) {
+        super(message);
+        this.name = "CustomError";
+      }
+    }
+
+    function testing(){
+      throw new customError("oops");
+    }
+
+    try {
+      testing();
+    } catch(err) {
+      console.error(err.message); // oops
+      console.error(err.name);; // Custom Error
+    }
+
+    TrackJS.track('Testing TrackJS!');                        
+    window.addEventListener('error', () => {
+        console.error("error detected");
+    });
+
   </script>
 </body>
 
